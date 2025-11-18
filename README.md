@@ -21,4 +21,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - Standalone components
 - `AuthService`, `RecipeService` — Each microservice has its own API endpoints.
-- Pages: LoginPage, RecipesPage, RecipeDetailsPage
+- Pages: LoginPage, RecipesPage, RecipeDetailsPage, ErrorPage
