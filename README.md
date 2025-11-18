@@ -17,6 +17,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 - `npm run test`
 
+## Credentials
+
+- `Login` - emilys
+- `Password` - emilyspass
+
 ## Architecture
 
 - Standalone components
