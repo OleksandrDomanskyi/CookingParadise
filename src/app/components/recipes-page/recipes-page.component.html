@@ -1,7 +1,7 @@
 <div class="recipes-page container">
   <header class="header">
-    <h1>Рецепты</h1>
-    <p class="subtitle">Найдите идеальное блюдо на любой вкус</p>
+    <h1>Recipes</h1>
+    <p class="subtitle">Browse and manage your recipe collection</p>
   </header>
 
   <app-recipes-search [search]="search()" [selectedTag]="tag()" (searchChange)="onSearch($event)"
@@ -11,20 +11,20 @@
     @if (loading()) {
     <div class="center">
       <mat-spinner diameter="60"></mat-spinner>
-      <p>Ищем вкусные рецепты...</p>
+      <p>Finding tasty recipes...</p>
     </div>
     } @else if (error()) {
     <div class="center error">
-      <h3>Что-то пошло не так</h3>
+      <h3>Something went wrong</h3>
       <p>{{ error() }}</p>
       <button mat-raised-button color="primary" (click)="retry()">
-        Повторить попытку
+        Retry
       </button>
     </div>
     } @else if (recipes().length === 0) {
     <div class="center empty">
-      <h3>Ничего не найдено</h3>
-      <p>Попробуйте изменить поиск или убрать фильтр</p>
+      <h3>Nothing found</h3>
+      <p>Try to change search or tag</p>
     </div>
     } @else {
     <app-recipes-table [recipes]="recipes()" />

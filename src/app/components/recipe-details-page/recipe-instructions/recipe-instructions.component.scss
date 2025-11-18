@@ -1,0 +1,49 @@
+.instructions-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  margin: 0 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #1976d2;
+  font-size: 1.5rem;
+}
+
+::ng-deep .mat-mdc-list-item {
+  padding: 0 16px !important;
+}
+
+.step {
+  min-height: 72px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 20px;
+}
+
+.step-number {
+  background: #1976d2;
+  color: white !important;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.step-text {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  flex: 1;
+}

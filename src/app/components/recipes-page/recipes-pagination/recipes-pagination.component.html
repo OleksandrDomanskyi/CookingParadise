@@ -3,7 +3,7 @@
     <mat-icon>chevron_left</mat-icon>
   </button>
 
-  <span>Страница {{ currentPage }} из {{ totalPages() }}</span>
+  <span>Page {{ currentPage }} from {{ totalPages() }}</span>
 
   <button mat-icon-button [disabled]="currentPage === totalPages()" (click)="pageChange.emit(currentPage + 1)">
     <mat-icon>chevron_right</mat-icon>

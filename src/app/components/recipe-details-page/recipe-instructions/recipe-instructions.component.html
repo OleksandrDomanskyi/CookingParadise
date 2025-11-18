@@ -1,0 +1,15 @@
+<div class="instructions-card">
+  <h2>
+    <mat-icon>restaurant_menu</mat-icon>
+    Instructions
+  </h2>
+
+  <mat-list>
+    @for (step of instructions; track $index) {
+      <mat-list-item class="step">
+        <span class="step-number" matListItemMeta>{{ $index + 1 }}</span>
+        <p matListItemTitle class="step-text">{{ step }}</p>
+      </mat-list-item>
+    }
+  </mat-list>
+</div>

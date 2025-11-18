@@ -1,13 +1,13 @@
 <div class="search-bar">
   <mat-form-field appearance="outline" class="search-input">
-    <mat-label>Поиск</mat-label>
+    <mat-label>Search</mat-label>
     <input matInput [value]="searchValue()" (input)="updateSearch($event)" placeholder="Например: chicken" />
   </mat-form-field>
 
   <mat-form-field appearance="outline" class="tag-input">
-    <mat-label>Тег</mat-label>
+    <mat-label>Tags</mat-label>
     <input matInput [value]="tagValue()" (input)="updateTag($event)" [matAutocomplete]="auto"
-      placeholder="Выберите или введите тег" />
+      placeholder="Select or enter a tag" />
     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event.option.value)">
       @for (tag of filteredTags(); track tag) {
       <mat-option [value]="tag">{{ tag }}</mat-option>

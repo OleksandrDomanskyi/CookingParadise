@@ -98,4 +98,11 @@ export class RecipeService {
     this.loading.set(false);
     this.error.set(null);
   }
+
+  getRecipeById(id: number) {
+    return this.http.get<Recipe>(`${this.baseUrl}/${id}`).pipe(
+      catchError(() => of(null)),
+      takeUntilDestroyed(this.destroyRef)
+    );
+  }
 }

@@ -1,0 +1,13 @@
+<div class="ingredients-card">
+  <h2>
+    <mat-icon>list_alt</mat-icon> 
+    Ingredients
+  </h2>
+  <mat-list>
+    @for (ing of ingredients; track ing) {
+    <mat-list-item>
+      <span matListItemTitle>{{ ing }}</span>
+    </mat-list-item>
+    }
+  </mat-list>
+</div>

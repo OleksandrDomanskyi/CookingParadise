@@ -1,0 +1,104 @@
+.header {
+  position: relative;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.hero-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.info {
+  padding: 32px;
+  background: white;
+  border-radius: 20px;
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-title {
+  margin: 0 0 12px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
+
+.cuisine-subtitle {
+  margin: 0 0 24px;
+  font-size: 1.4rem;
+  color: #1976d2;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.9;
+  }
+}
+
+.meta {
+  display: flex;
+  gap: 28px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 500;
+
+  mat-icon {
+    color: #1976d2;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.tags {
+  margin-top: 20px;
+}
+
+.difficulty-chip {
+  font-weight: 600;
+}
+
+.tag-chip {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+@media (max-width: 768px) {
+  .info {
+    margin: -60px 16px 0;
+    padding: 24px;
+  }
+
+  .recipe-title {
+    font-size: 2rem;
+  }
+
+  .cuisine-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .meta {
+    gap: 16px;
+    font-size: 1rem;
+  }
+}
