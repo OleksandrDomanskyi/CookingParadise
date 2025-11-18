@@ -1,0 +1,42 @@
+.header-toolbar {
+  padding: 0 24px;
+  height: 70px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.home-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0 16px !important;
+  height: 100%;
+}
+
+.title-text {
+  font-weight: 700;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.logout-btn {
+  border: 2px solid white !important;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .home-button {
+    font-size: 1.2rem;
+    gap: 8px;
+  }
+
+  .title-text {
+    display: none;
+  }
+}

@@ -11,6 +11,7 @@ import { RecipeService } from '../../services/recipe-service.service';
 import { RecipesParams } from '../../models/search-params.model';
 import { Recipe } from '../../models/recipe.model';
 import { RecipeEditDialogComponent } from '../recipe-edit-dialog/recipe-edit-dialog.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-recipes-main',
@@ -21,7 +22,8 @@ import { RecipeEditDialogComponent } from '../recipe-edit-dialog/recipe-edit-dia
     RecipesSearchComponent,
     RecipesTableComponent,
     RecipesPaginationComponent,
-    MatDialogModule
+    MatDialogModule,
+    HeaderComponent
   ],
   templateUrl: './recipes-page.component.html',
   styleUrl: './recipes-page.component.scss',

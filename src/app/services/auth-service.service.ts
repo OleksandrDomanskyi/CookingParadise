@@ -29,8 +29,7 @@ export class AuthService {
     return this.http
       .post<User>(this.AUTH_URL, {
         username: credentials.username,
-        password: credentials.password,
-        expiresInMins: 60,
+        password: credentials.password
       })
       .pipe(
         tap((user) => {

@@ -25,7 +25,7 @@ export class RecipeMainDetailsComponent {
   }
 
   onDelete(): void {
-    const confirmed = confirm(`Удалить рецепт "${this.recipe.name}"?`);
+    const confirmed = confirm(`Delete recipe "${this.recipe.name}"?`);
     if (confirmed) {
       this.delete.emit(this.recipe.id);
     }
