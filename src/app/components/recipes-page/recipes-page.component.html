@@ -1,1 +1,35 @@
-<p>recipes-page works!</p>
+<div class="recipes-page container">
+  <header class="header">
+    <h1>Рецепты</h1>
+    <p class="subtitle">Найдите идеальное блюдо на любой вкус</p>
+  </header>
+
+  <app-recipes-search [search]="search()" [selectedTag]="tag()" (searchChange)="onSearch($event)"
+    (tagChange)="onTagChange($event)" />
+
+  <section class="content">
+    @if (loading()) {
+    <div class="center">
+      <mat-spinner diameter="60"></mat-spinner>
+      <p>Ищем вкусные рецепты...</p>
+    </div>
+    } @else if (error()) {
+    <div class="center error">
+      <h3>Что-то пошло не так</h3>
+      <p>{{ error() }}</p>
+      <button mat-raised-button color="primary" (click)="retry()">
+        Повторить попытку
+      </button>
+    </div>
+    } @else if (recipes().length === 0) {
+    <div class="center empty">
+      <h3>Ничего не найдено</h3>
+      <p>Попробуйте изменить поиск или убрать фильтр</p>
+    </div>
+    } @else {
+    <app-recipes-table [recipes]="recipes()" />
+    <app-recipes-pagination [total]="total()" [limit]="limit" [currentPage]="page()"
+      (pageChange)="onPageChange($event)" />
+    }
+  </section>
+</div>

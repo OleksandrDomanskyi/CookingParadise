@@ -1,0 +1,41 @@
+table {
+  width: 100%;
+}
+
+.thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.tag {
+  font-size: 12px;
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-right: 4px;
+}
+
+.difficulty {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.easy {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.medium {
+  background: #fff3e0;
+  color: #ef6c00;
+}
+
+.hard {
+  background: #ffebee;
+  color: #c62828;
+}

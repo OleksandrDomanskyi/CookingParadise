@@ -1,0 +1,24 @@
+.search-bar {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.search-field {
+  flex: 1 1 300px;
+}
+
+.tag-field {
+  width: 280px;
+}
+
+@media (max-width: 640px) {
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .tag-field {
+    width: 100%;
+  }
+}

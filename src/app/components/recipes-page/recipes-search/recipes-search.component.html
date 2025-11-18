@@ -1,0 +1,23 @@
+<div class="search-bar">
+  <mat-form-field appearance="outline" class="search-input">
+    <mat-label>Поиск</mat-label>
+    <input matInput [value]="searchValue()" (input)="updateSearch($event)" placeholder="Например: chicken" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="tag-input">
+    <mat-label>Тег</mat-label>
+    <input matInput [value]="tagValue()" (input)="updateTag($event)" [matAutocomplete]="auto"
+      placeholder="Выберите или введите тег" />
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event.option.value)">
+      @for (tag of filteredTags(); track tag) {
+      <mat-option [value]="tag">{{ tag }}</mat-option>
+      }
+    </mat-autocomplete>
+
+    @if (tagValue()) {
+    <button matSuffix mat-icon-button (click)="clearTag()">
+      <mat-icon>close</mat-icon>
+    </button>
+    }
+  </mat-form-field>
+</div>
