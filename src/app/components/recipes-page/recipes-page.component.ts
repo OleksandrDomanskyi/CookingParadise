@@ -32,7 +32,7 @@ export class RecipesPageComponent implements OnInit {
   private readonly recipeService = inject(RecipeService);
   private readonly dialog = inject(MatDialog);
 
-  readonly limit = 10;
+  readonly limit = 5;
 
   readonly search = signal<string>('');
   readonly tag = signal<string>('');
