@@ -1,42 +1,68 @@
-import { Injectable, inject, signal, Signal } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { ENDPOINTS } from '../constants/endpoints';
-import { User } from '../models/user.model';
+import { User, Credentials } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly URL: string = `${environment.apiBaseUrl}${ENDPOINTS.authentification}`;
-
   private readonly http = inject(HttpClient);
+  private readonly router = inject(Router);
 
-  private _user = signal<User | null>(this.getUserFromStorage());
-  user: Signal<User | null> = this._user.asReadonly();
+  private readonly STORAGE_KEY = 'auth_user' as const;
+  private readonly AUTH_URL: string = `${environment.apiBaseUrl}${ENDPOINTS.authentification}` as const;
 
-  login(username: string, password: string) {
-    return this.http.post<User>(this.URL, { username, password }).pipe(
-      tap((user) => {
-        this._user.set(user);
-        localStorage.setItem('user', JSON.stringify(user));
+  private readonly userSignal = signal<User | null>(null);
+  public readonly user = this.userSignal.asReadonly();
+  public readonly isAuthenticated = () => this.user() !== null;
+
+  constructor() {
+    this.loadUserFromStorage();
+  }
+
+  public login(credentials: Credentials) {
+    return this.http
+      .post<User>(this.AUTH_URL, {
+        username: credentials.username,
+        password: credentials.password,
+        expiresInMins: 60,
       })
-    );
+      .pipe(
+        tap((user) => {
+          this.persistUser(user);
+        })
+      );
   }
 
-  logout() {
-    this._user.set(null);
-    localStorage.removeItem('user');
+  public logout(): void {
+    localStorage.removeItem(this.STORAGE_KEY);
+    this.userSignal.set(null);
+    this.router.navigate([''], { replaceUrl: true });
   }
 
-  isAuthenticated(): boolean {
-    return !!this._user();
+  private loadUserFromStorage(): void {
+    const stored = localStorage.getItem(this.STORAGE_KEY);
+    if (!stored) return;
+
+    try {
+      const user = JSON.parse(stored) as User;
+      if (user?.id && typeof user.token === 'string') {
+        this.userSignal.set(user);
+      } else {
+        throw new Error('Invalid user structure');
+      }
+    } catch {
+      localStorage.removeItem(this.STORAGE_KEY);
+    }
   }
 
-  private getUserFromStorage(): User | null {
-    const saved = localStorage.getItem('user');
-    return saved ? JSON.parse(saved) : null;
+  private persistUser(user: User): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
+    this.userSignal.set(user);
   }
 }

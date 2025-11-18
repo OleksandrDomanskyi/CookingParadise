@@ -1,1 +1,34 @@
-<p>login-page works!</p>
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <mat-card-header class="login-card__header">
+      <mat-card-title class="login-card__title">Cooking Paradise</mat-card-title>
+      <mat-card-subtitle class="login-card__subtitle">Sign in to manage your recipes</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" autocomplete="username" required />
+          <mat-error *ngIf="form.controls.username.hasError('required')">
+            Enter your username
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" autocomplete="current-password" required />
+          <mat-error *ngIf="form.controls.password.hasError('required')">
+            Enter your password
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" class="submit-btn"
+          [disabled]="form.invalid || loading()">
+          <mat-spinner diameter="20" *ngIf="loading()"></mat-spinner>
+          <span *ngIf="!loading()">Sign In</span>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

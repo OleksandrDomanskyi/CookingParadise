@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://dummyjson.com'
+  apiBaseUrl: 'https://corsproxy.io/?url=https://dummyjson.com'
 };
