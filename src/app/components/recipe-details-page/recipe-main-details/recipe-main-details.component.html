@@ -2,7 +2,19 @@
   <img [src]="recipe.image" [alt]="recipe.name" class="hero-image" />
 
   <div class="info">
-    <h1 class="recipe-title">{{ recipe.name }}</h1>
+    <div class="title-bar">
+      <h1 class="recipe-title">{{ recipe.name }}</h1>
+
+      <div class="actions">
+        <button mat-icon-button color="primary" (click)="onEdit()" matTooltip="Edit Recipe">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="onDelete()" matTooltip="Delete Recipe">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
 
     <h2 class="cuisine-subtitle">
       <mat-icon>place</mat-icon>
@@ -29,7 +41,6 @@
         <mat-chip color="accent" selected class="difficulty-chip">
           {{ recipe.difficulty }}
         </mat-chip>
-
         @for (tag of recipe.tags; track tag) {
           <mat-chip class="tag-chip">{{ tag }}</mat-chip>
         }

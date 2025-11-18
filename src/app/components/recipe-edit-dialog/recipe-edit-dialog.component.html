@@ -1,0 +1,121 @@
+<h2 mat-dialog-title>Edit recipe</h2>
+
+<mat-dialog-content class="edit-dialog-content">
+  <form [formGroup]="editForm" class="edit-form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cuisine</mat-label>
+      <input matInput formControlName="cuisine" required />
+    </mat-form-field>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Time (min)</mat-label>
+        <input matInput type="number" formControlName="cookTimeMinutes" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Portions</mat-label>
+        <input matInput type="number" formControlName="servings" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Calories</mat-label>
+        <input matInput type="number" formControlName="caloriesPerServing" required />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Difficulty</mat-label>
+      <mat-select formControlName="difficulty" required>
+        <mat-option value="Easy">Easy</mat-option>
+        <mat-option value="Medium">Medium</mat-option>
+        <mat-option value="Hard">Hard</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="tags-section">
+      <div class="input-with-button">
+        <mat-form-field appearance="outline" class="tag-input">
+          <mat-label>Tags</mat-label>
+          <input matInput #tagInput placeholder="example: vegan" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="addTag(tagInput.value); tagInput.value=''">
+          Add tag
+        </button>
+      </div>
+
+      <mat-chip-grid class="tags-list">
+        @for (tag of tags(); track tag) {
+        <mat-chip (removed)="removeTag(tag)">
+          {{ tag }}
+          <button matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        }
+      </mat-chip-grid>
+    </div>
+
+    <div class="section">
+      <h3>Ingredients</h3>
+      <div class="input-with-button">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New Ingredient</mat-label>
+          <input matInput #ingredientInput placeholder="example: 200 g tomatoes" />
+        </mat-form-field>
+        <button mat-raised-button color="accent"
+          (click)="addIngredient(ingredientInput.value); ingredientInput.value=''">
+          Add
+        </button>
+      </div>
+
+      <mat-list class="items-list">
+        @for (ing of ingredients(); track $index) {
+        <mat-list-item>
+          <span>{{ ing }}</span>
+          <button mat-icon-button color="warn" (click)="removeIngredient($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+        }
+      </mat-list>
+    </div>
+
+    <div class="section">
+      <h3>Instructions</h3>
+      <div class="input-with-button">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>New step</mat-label>
+          <textarea matInput #stepInput rows="2" placeholder="Warm your owen to 180°C..."></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="accent" (click)="addStep(stepInput.value); stepInput.value=''">
+          Add step
+        </button>
+      </div>
+
+      <mat-list class="items-list numbered">
+        @for (step of instructions(); track $index) {
+        <mat-list-item>
+          <span class="step-number">{{ $index + 1 }}</span>
+          <span class="step-text">{{ step }}</span>
+          <button mat-icon-button color="warn" (click)="removeStep($index)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+        }
+      </mat-list>
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Chancel</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="!editForm.valid">
+    Save changes
+  </button>
+</mat-dialog-actions>

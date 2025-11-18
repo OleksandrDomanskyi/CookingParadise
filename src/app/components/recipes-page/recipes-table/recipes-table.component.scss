@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .thumb {
@@ -7,35 +8,59 @@ table {
   height: 60px;
   object-fit: cover;
   border-radius: 8px;
-}
-
-.tag {
-  font-size: 12px;
-  background: #e3f2fd;
-  color: #1565c0;
-  padding: 2px 8px;
-  border-radius: 12px;
-  margin-right: 4px;
+  display: block;
 }
 
 .difficulty {
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: inline-block;
+
+  &.easy {
+    background: #e8f5e9;
+    color: #2e7d32;
+  }
+
+  &.medium {
+    background: #fff3e0;
+    color: #ef6c00;
+  }
+
+  &.hard {
+    background: #ffebee;
+    color: #c62828;
+  }
 }
 
-.easy {
-  background: #e8f5e9;
-  color: #2e7d32;
+.tag {
+  background: #e3f2fd;
+  color: #1565c0;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  margin: 2px 4px 2px 0;
+  display: inline-block;
 }
 
-.medium {
-  background: #fff3e0;
-  color: #ef6c00;
+.actions-cell {
+  padding: 8px 4px !important;
+  text-align: center;
+  vertical-align: middle !important;
 }
 
-.hard {
-  background: #ffebee;
-  color: #c62828;
+.actions-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  min-height: 48px;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 12px 8px !important;
+  vertical-align: middle;
 }

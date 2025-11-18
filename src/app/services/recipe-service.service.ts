@@ -105,4 +105,15 @@ export class RecipeService {
       takeUntilDestroyed(this.destroyRef)
     );
   }
+
+  updateLocalRecipe(updated: Recipe): void {
+    this.recipes.update(recipes =>
+      recipes.map(r => (r.id === updated.id ? updated : r))
+    );
+  }
+
+  deleteLocalRecipe(id: number): void {
+    this.recipes.update(recipes => recipes.filter(r => r.id !== id));
+    this.total.update(t => Math.max(0, t - 1));
+  }
 }

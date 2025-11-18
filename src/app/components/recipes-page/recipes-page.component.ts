@@ -2,12 +2,15 @@ import { Component, effect, untracked, inject, signal, OnInit } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { RecipesSearchComponent } from './recipes-search/recipes-search.component';
 import { RecipesTableComponent } from './recipes-table/recipes-table.component';
 import { RecipesPaginationComponent } from './recipes-pagination/recipes-pagination.component';
 import { RecipeService } from '../../services/recipe-service.service';
 import { RecipesParams } from '../../models/search-params.model';
+import { Recipe } from '../../models/recipe.model';
+import { RecipeEditDialogComponent } from '../recipe-edit-dialog/recipe-edit-dialog.component';
 
 @Component({
   selector: 'app-recipes-main',
@@ -18,6 +21,7 @@ import { RecipesParams } from '../../models/search-params.model';
     RecipesSearchComponent,
     RecipesTableComponent,
     RecipesPaginationComponent,
+    MatDialogModule
   ],
   templateUrl: './recipes-page.component.html',
   styleUrl: './recipes-page.component.scss',
@@ -26,6 +30,7 @@ export class RecipesPageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
   private readonly recipeService = inject(RecipeService);
+  private readonly dialog = inject(MatDialog);
 
   readonly limit = 10;
 
@@ -37,16 +42,6 @@ export class RecipesPageComponent implements OnInit {
   readonly total = this.recipeService.total;
   readonly loading = this.recipeService.loading;
   readonly error = this.recipeService.error;
-
-  ngOnInit(): void {
-    const params = this.route.snapshot.queryParamMap;
-    this.search.set(params.get('search') ?? '');
-    this.tag.set(params.get('tag') ?? '');
-    const pageParam = params.get('page');
-    this.page.set(pageParam ? Math.max(1, Number(pageParam)) : 1);
-
-    this.loadRecipes();
-  }
 
   constructor() {
     effect(() => {
@@ -76,14 +71,12 @@ export class RecipesPageComponent implements OnInit {
     });
   }
 
-  private loadRecipes(): void {
-    const params: RecipesParams = {
-      search: this.search() || undefined,
-      tag: this.tag() || undefined,
-      limit: this.limit,
-      skip: (this.page() - 1) * this.limit,
-    };
-    this.recipeService.loadRecipes(params);
+  ngOnInit(): void {
+    const params = this.route.snapshot.queryParamMap;
+    this.search.set(params.get('search') ?? '');
+    this.tag.set(params.get('tag') ?? '');
+    const pageParam = params.get('page');
+    this.page.set(pageParam ? Math.max(1, Number(pageParam)) : 1);
   }
 
   onSearch(value: string): void {
@@ -101,6 +94,35 @@ export class RecipesPageComponent implements OnInit {
   }
 
   retry(): void {
-    this.loadRecipes();
+    const params: RecipesParams = {
+      search: this.search() || undefined,
+      tag: this.tag() || undefined,
+      limit: this.limit,
+      skip: (this.page() - 1) * this.limit,
+    };
+    this.recipeService.loadRecipes(params);
+  }
+
+  onEditRecipe(recipe: Recipe): void {
+    const dialogRef = this.dialog.open(RecipeEditDialogComponent, {
+      width: '760px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      data: { recipe },
+      autoFocus: 'first-tabbable',
+    });
+
+    dialogRef.afterClosed().subscribe((updatedRecipe: Recipe | undefined) => {
+      if (updatedRecipe) {
+        this.recipeService.updateLocalRecipe(updatedRecipe);
+      }
+    });
+  }
+
+  onDeleteRecipe(id: number): void {
+    const confirmed = confirm('Delete this recipe?');
+    if (confirmed) {
+      this.recipeService.deleteLocalRecipe(id);
+    }
   }
 }

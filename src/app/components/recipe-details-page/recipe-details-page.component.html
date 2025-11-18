@@ -13,7 +13,11 @@
     <app-back-button (back)="goBack()" />
 
     @if (recipe(); as recipe) {
-      <app-recipe-main-details [recipe]="recipe" />
+      <app-recipe-main-details 
+        [recipe]="recipe"
+        (edit)="onEdit()"
+        (delete)="onDelete(recipe.id)" 
+      />
 
       <div class="details-grid">
         <app-recipe-ingredients [ingredients]="recipe.ingredients" />

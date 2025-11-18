@@ -1,0 +1,51 @@
+.edit-dialog-content {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 8px 0;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+
+  &>* {
+    flex: 1;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+.input-with-button {
+  display: flex;
+  gap: 12px;
+  align-items: end;
+
+  .tag-input,
+  mat-form-field {
+    flex: 1;
+  }
+}
+
+.tags-list,
+.items-list {
+  margin-top: 12px;
+}
+
+.numbered .mat-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-number {
+  font-weight: bold;
+  color: #1976d2;
+}

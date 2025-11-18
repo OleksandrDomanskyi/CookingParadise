@@ -27,7 +27,11 @@
       <p>Try to change search or tag</p>
     </div>
     } @else {
-    <app-recipes-table [recipes]="recipes()" />
+    <app-recipes-table 
+      [recipes]="recipes()" 
+      (edit)="onEditRecipe($event)"
+      (delete)="onDeleteRecipe($event)"
+    />
     <app-recipes-pagination [total]="total()" [limit]="limit" [currentPage]="page()"
       (pageChange)="onPageChange($event)" />
     }
